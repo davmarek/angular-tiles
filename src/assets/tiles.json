@@ -1,0 +1,40 @@
+{
+  "gridSchema": {
+    "columns": 4,
+    "spans": [1, 1, 2, 2, 1, 1]
+  },
+  "title": "Extra Text",
+  "subtitle": "Get Inspired",
+  "tiles": [
+    {
+      "text": "Text 1",
+      "link": "https://google.com",
+      "bgColor": "#9653fe"
+    },
+    {
+      "text": "Text 2",
+      "link": "https://google.com",
+      "bgColor": "#6d6dff"
+    },
+    {
+      "text": "Text 3",
+      "link": "https://google.com",
+      "bgColor": "#507fff"
+    },
+    {
+      "text": "Text 4",
+      "link": "https://google.com",
+      "bgColor": "#507fff"
+    },
+    {
+      "text": "Text 5",
+      "link": "https://google.com",
+      "bgColor": "#9653fe"
+    },
+    {
+      "text": "Text 6",
+      "link": "https://google.com",
+      "bgColor": "#6d6dff"
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+<main>
+  @if (tileConfig$ | async; as c) {
+    <h2 class="title">{{ c.title }}</h2>
+    <h3 class="subtitle">{{ c.subtitle }}</h3>
+    <ul
+      class="tile-grid"
+      [style.gridTemplateColumns]="`repeat(auto-fill, minmax(270px,1fr))`"
+      [style.gridTemplateRows]="`repeat(${c.tiles.length}, 1fr)`"
+    >
+      @for (tile of c.tiles; track tile.text; let idx = $index) {
+        <a
+          [href]="tile.link"
+          target="_blank"
+          [style.--spans]="c.gridSchema.spans[idx % c.gridSchema.spans.length]"
+          [style.aspectRatio]="
+            c.gridSchema.spans[idx % c.gridSchema.spans.length] === 1 ? '1/1' : ''
+          "
+        >
+          <li class="tile" [style.background]="tile.bgColor">
+            {{ tile.text }} {{ c.gridSchema.spans[idx % c.gridSchema.spans.length] }}
+          </li>
+        </a>
+      }
+    </ul>
+  }
+</main>
