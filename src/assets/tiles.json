@@ -1,5 +1,9 @@
 {
   "gridSchema": {
+    "columns": 3,
+    "spans": [1]
+  },
+  "gridSchemaAlt": {
     "columns": 4,
     "spans": [1, 1, 2, 2, 1, 1]
   },
@@ -7,32 +11,32 @@
   "subtitle": "Get Inspired",
   "tiles": [
     {
-      "text": "Text 1",
+      "text": "Styles",
       "link": "https://google.com",
       "bgColor": "#9653fe"
     },
     {
-      "text": "Text 2",
+      "text": "Print Templates",
       "link": "https://google.com",
       "bgColor": "#6d6dff"
     },
     {
-      "text": "Text 3",
+      "text": "Colors",
       "link": "https://google.com",
       "bgColor": "#507fff"
     },
     {
-      "text": "Text 4",
+      "text": "Photos",
       "link": "https://google.com",
       "bgColor": "#507fff"
     },
     {
-      "text": "Text 5",
+      "text": "Videos",
       "link": "https://google.com",
       "bgColor": "#9653fe"
     },
     {
-      "text": "Text 6",
+      "text": "Shop",
       "link": "https://google.com",
       "bgColor": "#6d6dff"
     }

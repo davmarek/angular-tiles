@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-export interface TileDefinition {
+export interface Tile {
   text: string;
   link: string;
   bgColor: string;
@@ -10,11 +10,11 @@ export interface GridSchema {
   columns: number;
   spans: number[];
 }
-export interface TilesResponse {
+export interface TilesConfig {
   gridSchema: GridSchema;
   title: string;
   subtitle: string;
-  tiles: TileDefinition[];
+  tiles: Tile[];
 }
 
 @Injectable({
@@ -23,6 +23,6 @@ export interface TilesResponse {
 export class TileService {
   constructor(private http: HttpClient) {}
   getTilesConfig$() {
-    return this.http.get<TilesResponse>('/assets/tiles.json');
+    return this.http.get<TilesConfig>('/assets/tiles.json');
   }
 }

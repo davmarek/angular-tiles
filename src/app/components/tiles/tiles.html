@@ -1,0 +1,34 @@
+<section>
+  @if (tileConfig$ | async; as c) {
+    <h5 class="title">{{ c.title }}</h5>
+    <h2 class="subtitle">{{ c.subtitle }}</h2>
+    <ul class="tile-grid" [style.gridTemplateColumns]="`repeat(${c.gridSchema.columns}, 1fr)`">
+      @for (tile of c.tiles; track $index; let idx = $index) {
+        <a
+          [href]="tile.link"
+          target="_blank"
+          [class.is-square]="c.gridSchema.spans[idx % c.gridSchema.spans.length] === 1"
+          [style.gridColumn]="`span ${c.gridSchema.spans[idx % c.gridSchema.spans.length]}`"
+        >
+          <li class="tile" [style.background]="tile.bgColor">
+            <span>
+              {{ tile.text }}
+            </span>
+          </li>
+        </a>
+      }
+    </ul>
+  }
+  @if (isDebugMode) {
+    <button
+      command="show-modal"
+      commandfor="tile-settings-dialog"
+      type="button"
+      class="btn-settings"
+    >
+      <img src="/assets/icons/icon-bb-iconset-settings.svg" alt="Settings" />
+    </button>
+
+    <app-tiles-settings />
+  }
+</section>

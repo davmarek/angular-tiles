@@ -1,0 +1,6 @@
+main {
+  padding: 3rem 0.5rem 6rem;
+  @media screen and (min-width: 600px) {
+    padding: 3rem 1rem 6rem;
+  }
+}
