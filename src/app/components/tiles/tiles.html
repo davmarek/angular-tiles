@@ -1,5 +1,5 @@
 <section>
-  @if (tileConfig$ | async; as c) {
+  @if (config$ | async; as c) {
     <h5 class="title">{{ c.title }}</h5>
     <h2 class="subtitle">{{ c.subtitle }}</h2>
     <ul class="tile-grid" [style.gridTemplateColumns]="`repeat(${c.gridSchema.columns}, 1fr)`">
@@ -22,7 +22,7 @@
   @if (isDebugMode) {
     <button
       command="show-modal"
-      commandfor="tile-settings-dialog"
+      commandfor="tilesSettingsDialog"
       type="button"
       class="btn-settings"
     >

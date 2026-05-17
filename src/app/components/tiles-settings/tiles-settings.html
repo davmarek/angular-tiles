@@ -1,4 +1,55 @@
-<dialog id="tile-settings-dialog">
-  <p>This dialog was opened using an invoker command.</p>
-  <button commandfor="tile-settings-dialog" command="close">Close</button>
+<dialog #tilesSettingsDialog id="tilesSettingsDialog" (toggle)="onToggle($event)">
+  <form [formGroup]="form" (ngSubmit)="onSave()">
+    <aside class="left">
+      <div class="top">
+        <div class="header">
+          <icon-admin-quares />
+          <span class="modal-name">TILES</span>
+        </div>
+        <div class="nav">
+          <ul>
+            <li class="active">General</li>
+          </ul>
+        </div>
+      </div>
+      <div class="middle">
+        <input type="text" formControlName="title" /> <br />
+        <input type="text" formControlName="subtitle" />
+        <select name="gridSchema" id="gridSchema" formControlName="gridSchema" type="number">
+          <option value="3">3 columns</option>
+          <option value="4">4 columns</option>
+        </select>
+      </div>
+      <div class="bottom">
+        <button type="submit" [disabled]="!form.valid || form.pristine">Update</button>
+      </div>
+    </aside>
+
+    <div class="right">
+      <header>
+        <div class="close">
+          <button type="button" commandfor="tilesSettingsDialog" command="close" class="cross">
+            <img src="/assets/icons/icon-admin-iconset-cross-small.svg" alt="Settings" />
+          </button>
+        </div>
+        <div class="actions">
+          <span class="heading">Tiles</span>
+          <button type="button" (click)="addTile()">
+            <img src="/assets/icons/icon-admin-iconset-plus.svg" alt="Plus" />
+            Add
+          </button>
+        </div>
+      </header>
+      <div formArrayName="tiles">
+        <h1>Tiles</h1>
+        @for (tile of tiles.controls; track tile; let i = $index) {
+          <div [formGroupName]="i">
+            <input type="text" formControlName="text" />
+            <input type="text" formControlName="link" />
+            <input type="color" formControlName="bgColor" />
+          </div>
+        }
+      </div>
+    </div>
+  </form>
 </dialog>
