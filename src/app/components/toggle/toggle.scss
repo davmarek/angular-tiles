@@ -1,0 +1,32 @@
+.container {
+  position: relative;
+  display: block;
+  width: 36px;
+  height: 20px;
+  background-color: #eee;
+  box-shadow: 0 0 0 1px rgb(0 0 0 / 0.1);
+  border-radius: 15px;
+
+  transition: all 200ms ease;
+
+  .ball {
+    width: 16px;
+    height: 16px;
+    border-radius: 100%;
+    background-color: #fff;
+
+    position: absolute;
+    transform: translateY(-50%);
+
+    top: 50%;
+    left: 2px;
+    transition: all 200ms ease;
+  }
+
+  &.checked {
+    background-color: var(--admin-blue);
+    .ball {
+      left: calc(100% - 16px - 2px);
+    }
+  }
+}

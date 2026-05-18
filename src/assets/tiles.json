@@ -1,4 +1,7 @@
 {
+  "title": "Extra Text",
+  "subtitle": "Get Inspired",
+  "visibleTileCount": 0,
   "gridSchema": {
     "columns": 3,
     "spans": [1]
@@ -7,8 +10,6 @@
     "columns": 4,
     "spans": [1, 1, 2, 2, 1, 1]
   },
-  "title": "Extra Text",
-  "subtitle": "Get Inspired",
   "tiles": [
     {
       "text": "Styles",
@@ -18,17 +19,20 @@
     {
       "text": "Print Templates",
       "link": "https://google.com",
-      "bgColor": "#6d6dff"
+      "bgColor": "#6d6dff",
+      "bgImage": "/images/brand.jpg"
     },
     {
       "text": "Colors",
       "link": "https://google.com",
-      "bgColor": "#507fff"
+      "bgColor": "#507fff",
+      "bgImage": "/images/colors.jpg"
     },
     {
       "text": "Photos",
       "link": "https://google.com",
-      "bgColor": "#507fff"
+      "bgColor": "#507fff",
+      "bgImage": "/images/hill.jpg"
     },
     {
       "text": "Videos",
@@ -38,7 +42,8 @@
     {
       "text": "Shop",
       "link": "https://google.com",
-      "bgColor": "#6d6dff"
+      "bgColor": "#6d6dff",
+      "bgImage": "/images/pig.jpg"
     }
   ]
 }

@@ -19,6 +19,12 @@
           <option value="3">3 columns</option>
           <option value="4">4 columns</option>
         </select>
+        <div>
+          <toggle [(checked)]="showAll" />
+          @if (showAll()) {
+            <input type="number" formControlName="visibleTilesCount" />
+          }
+        </div>
       </div>
       <div class="bottom">
         <button type="submit" [disabled]="!form.valid || form.pristine">Update</button>
@@ -40,15 +46,41 @@
           </button>
         </div>
       </header>
-      <div formArrayName="tiles">
-        <h1>Tiles</h1>
-        @for (tile of tiles.controls; track tile; let i = $index) {
-          <div [formGroupName]="i">
-            <input type="text" formControlName="text" />
-            <input type="text" formControlName="link" />
-            <input type="color" formControlName="bgColor" />
-          </div>
-        }
+      <div>
+        <table>
+          <thead>
+            <tr>
+              <th>X</th>
+              <th class="center">BG</th>
+              <th>Text</th>
+              <th>Link</th>
+              <th class="right">
+                <button>V</button>
+              </th>
+            </tr>
+          </thead>
+          <tbody formArrayName="tiles">
+            @for (tile of tiles.controls; track tile; let i = $index) {
+              <tr [formGroupName]="i">
+                <td>
+                  <button>X</button>
+                </td>
+                <td>
+                  <input type="color" formControlName="bgColor" />
+                </td>
+                <td>
+                  <input type="text" formControlName="text" />
+                </td>
+                <td>
+                  <input type="text" formControlName="link" />
+                </td>
+                <td>
+                  <input type="text" formControlName="bgImage" />
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
       </div>
     </div>
   </form>

@@ -147,4 +147,60 @@ form {
       }
     }
   }
+
+  table {
+    border-spacing: 0;
+    border-collapse: separate;
+    border-radius: 4px;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    border: solid 1px #e2e7ee;
+    background-color: #fff;
+
+    th,
+    td {
+      text-align: left;
+      &.center {
+        text-align: center;
+      }
+      &.right {
+        text-align: right;
+      }
+    }
+    thead {
+      tr {
+        background-color: #f1f4f8;
+        border-radius: 4px 4px 0 0;
+        height: 30px;
+        padding: 7px 8px 7px 11px;
+        font-size: 10px;
+        font-weight: 500;
+        text-transform: uppercase;
+
+        td,
+        th {
+          font-size: 10px;
+          font-weight: 500;
+          letter-spacing: 0.6px;
+          color: #516173;
+          padding: 9px 0;
+
+          &:first-child {
+            padding-left: 14px;
+            padding-right: 24px;
+          }
+          &:last-child {
+            padding-left: 48px;
+            padding-right: 14px;
+          }
+        }
+      }
+    }
+
+    tbody {
+      td,
+      th {
+        padding: 7px 0 6px;
+      }
+    }
+  }
 }

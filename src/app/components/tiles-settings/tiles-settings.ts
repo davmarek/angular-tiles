@@ -1,4 +1,4 @@
-import { Component, ElementRef, inject, ViewChild } from '@angular/core';
+import { Component, ElementRef, inject, model, ViewChild } from '@angular/core';
 import {
   FormArray,
   FormControl,
@@ -10,11 +10,13 @@ import {
 import { take } from 'rxjs';
 import { TilesConfig, TileService } from '../../services/tile-service';
 import { IconAdminQuares } from '../icons/admin-quares';
+import { Toggle } from '../toggle/toggle';
 
 type TileForm = FormGroup<{
   text: FormControl<string>;
   link: FormControl<string>;
   bgColor: FormControl<string>;
+  bgImage: FormControl<string>;
 }>;
 
 const GRID_SCHEMAS = new Map([
@@ -24,7 +26,7 @@ const GRID_SCHEMAS = new Map([
 
 @Component({
   selector: 'app-tiles-settings',
-  imports: [ReactiveFormsModule, IconAdminQuares],
+  imports: [ReactiveFormsModule, IconAdminQuares, Toggle],
   templateUrl: './tiles-settings.html',
   styleUrl: './tiles-settings.scss',
 })
@@ -36,8 +38,11 @@ export class TilesSettings {
     title: ['', Validators.required],
     subtitle: ['', Validators.required],
     gridSchema: ['', Validators.required], // Needs to be string - because HTML select
+    visibleTilesCount: [0],
     tiles: this.fb.array<TileForm>([]),
   });
+
+  readonly showAll = model<boolean>(false);
 
   @ViewChild('tilesSettingsDialog') dialog!: ElementRef<HTMLDialogElement>;
 
@@ -49,6 +54,7 @@ export class TilesSettings {
       text: ['', Validators.required],
       link: ['', Validators.required],
       bgColor: ['#000000', Validators.required],
+      bgImage: [''],
     });
   }
 
@@ -71,6 +77,7 @@ export class TilesSettings {
       title: config.title,
       subtitle: config.subtitle,
       gridSchema: config.gridSchema.columns.toString(),
+      visibleTilesCount: config.visibleTileCount ?? 0,
     });
 
     // Push all defined tiles to FormArray
@@ -96,6 +103,7 @@ export class TilesSettings {
     this.tileService.updateConfig({
       title: v.title,
       subtitle: v.subtitle,
+      visibleTileCount: this.showAll() ? v.visibleTilesCount : 0,
       gridSchema: {
         columns: parseInt(v.gridSchema),
         spans: spans ?? [1],

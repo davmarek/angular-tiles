@@ -2,23 +2,32 @@
   @if (config$ | async; as c) {
     <h5 class="title">{{ c.title }}</h5>
     <h2 class="subtitle">{{ c.subtitle }}</h2>
-    <ul class="tile-grid" [style.gridTemplateColumns]="`repeat(${c.gridSchema.columns}, 1fr)`">
-      @for (tile of c.tiles; track $index; let idx = $index) {
-        <a
-          [href]="tile.link"
-          target="_blank"
-          [class.is-square]="c.gridSchema.spans[idx % c.gridSchema.spans.length] === 1"
-          [style.gridColumn]="`span ${c.gridSchema.spans[idx % c.gridSchema.spans.length]}`"
-        >
-          <li class="tile" [style.background]="tile.bgColor">
-            <span>
-              {{ tile.text }}
-            </span>
-          </li>
-        </a>
-      }
-    </ul>
+    @if (c.tiles.length > 0) {
+      <ul class="tile-grid" [style.gridTemplateColumns]="`repeat(${c.gridSchema.columns}, 1fr)`">
+        @for (tile of limitTiles(c.tiles, c.visibleTileCount); track $index; let idx = $index) {
+          <a
+            [href]="tile.link"
+            target="_blank"
+            [class.is-square]="c.gridSchema.spans[idx % c.gridSchema.spans.length] === 1"
+            [style.gridColumn]="`span ${c.gridSchema.spans[idx % c.gridSchema.spans.length]}`"
+          >
+            <li
+              class="tile"
+              [style.background-color]="tile.bgColor"
+              [style.background-image]="`url(${tile?.bgImage})`"
+            >
+              <span> {{ tile.text }} - {{ tile.bgImage }} </span>
+            </li>
+          </a>
+        }
+      </ul>
+    } @else {
+      <p>No tiles defined</p>
+    }
+  } @else {
+    <p>Loading...</p>
   }
+
   @if (isDebugMode) {
     <button
       command="show-modal"

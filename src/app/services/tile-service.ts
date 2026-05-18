@@ -1,21 +1,23 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
-export interface Tile {
-  text: string;
-  link: string;
-  bgColor: string;
+export interface TilesConfig {
+  gridSchema: GridSchema;
+  title: string;
+  subtitle: string;
+  visibleTileCount: number | null; // 0 = show all, N = show first N
+  tiles: Tile[];
 }
 export interface GridSchema {
   columns: number;
   spans: number[];
 }
-export interface TilesConfig {
-  gridSchema: GridSchema;
-  title: string;
-  subtitle: string;
-  tiles: Tile[];
+export interface Tile {
+  text: string;
+  link: string;
+  bgColor: string;
+  bgImage?: string;
 }
 
 @Injectable({
@@ -23,13 +25,26 @@ export interface TilesConfig {
 })
 export class TileService {
   private CONFIG_PATH = '/assets/tiles.json' as const;
+
+  private http = inject(HttpClient);
+
   private _configSubject = new BehaviorSubject<TilesConfig | null>(null);
   readonly config$ = this._configSubject.asObservable();
 
-  constructor(private http: HttpClient) {}
-
   load() {
-    this.http.get<TilesConfig>(this.CONFIG_PATH).subscribe((cfg) => this._configSubject.next(cfg));
+    this.http.get<TilesConfig>(this.CONFIG_PATH).subscribe({
+      next: (cfg) => {
+        this._configSubject.next(cfg);
+      },
+      error: () =>
+        this._configSubject.next({
+          gridSchema: { columns: 1, spans: [1] },
+          title: '',
+          subtitle: '',
+          visibleTileCount: 0,
+          tiles: [],
+        }),
+    });
   }
 
   updateConfig(patch: Partial<TilesConfig>) {

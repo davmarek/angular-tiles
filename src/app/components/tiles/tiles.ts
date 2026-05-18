@@ -1,8 +1,7 @@
 import { AsyncPipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable, tap } from 'rxjs';
-import { TilesConfig, TileService } from '../../services/tile-service';
+import { Tile, TileService } from '../../services/tile-service';
 import { TilesSettings } from '../tiles-settings/tiles-settings';
 
 @Component({
@@ -12,26 +11,23 @@ import { TilesSettings } from '../tiles-settings/tiles-settings';
   styleUrl: './tiles.scss',
 })
 export class Tiles {
-  protected readonly config$?: Observable<TilesConfig | null>;
+  private route = inject(ActivatedRoute);
+  private tileService = inject(TileService);
+
+  protected readonly config$ = this.tileService.config$;
   protected isDebugMode: boolean = false;
 
-  constructor(
-    private route: ActivatedRoute,
-    private tileService: TileService,
-  ) {
-    this.config$ = this.tileService.config$.pipe(
-      tap((c) =>
-        console.log(
-          'GRID emit:',
-          c?.title,
-          c?.tiles?.map((t) => t.text),
-        ),
-      ),
-    );
-
+  constructor() {
     this.tileService.load();
     this.route.queryParams.subscribe((params) => {
       this.isDebugMode = params['mode'] === 'editor';
     });
+  }
+
+  limitTiles(tiles: Tile[], count?: number | null): Tile[] {
+    if (count === undefined || count === null || count === 0) {
+      return tiles;
+    }
+    return tiles.slice(0, count);
   }
 }

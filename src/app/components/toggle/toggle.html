@@ -1,0 +1,13 @@
+<label for="custom-checkbox">
+  <input
+    type="checkbox"
+    [checked]="checked()"
+    (change)="toggle()"
+    id="custom-checkbox"
+    style="display: none"
+  />
+
+  <div class="container" [class.checked]="checked()">
+    <div class="ball"></div>
+  </div>
+</label>
