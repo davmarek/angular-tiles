@@ -40,6 +40,24 @@ dialog {
       scale: 0.95;
     }
   }
+  .dialog-wrapper {
+    position: relative;
+    .close-wrapper {
+      position: absolute;
+      top: 14px;
+      right: 11px;
+      padding: 4px;
+
+      display: flex;
+      justify-content: end;
+
+      button.close-btn {
+        all: unset;
+        text-align: right;
+        cursor: pointer;
+      }
+    }
+  }
 }
 
 form {
@@ -88,6 +106,17 @@ input {
     height: 18px;
     outline: none;
   }
+}
+
+input.ng-invalid {
+  border: none;
+  outline-offset: -1px;
+  outline: 1px solid rgba(251 44 54 /0.5);
+}
+input.ng-invalid:focus {
+  outline-offset: -2px;
+  outline-width: 2px;
+  outline-color: rgb(255 100 103);
 }
 
 button {
@@ -257,37 +286,39 @@ button {
       }
     }
   }
+}
 
-  .dialog-footer {
-    padding: 10px 20px;
-    margin-top: 22px;
+.dialog-footer {
+  padding: 10px 20px;
+  margin-top: 22px;
 
-    border-top: 1px solid #f1f4f8;
-    button {
-      width: 100%;
-      height: 100%;
-      padding: 12px;
+  border-top: 1px solid #f1f4f8;
+  button {
+    width: 100%;
+    height: 100%;
+    padding: 12px;
+  }
+
+  &:not(.mobile) {
+    @media screen and (max-width: 768px) {
+      display: none;
+    }
+  }
+
+  &.mobile {
+    margin-top: 0;
+    @media screen and (min-width: 768px) {
+      display: none;
     }
   }
 }
-
 .settings-main {
   width: 100%;
   min-width: 0;
   background-color: #f9fafb;
 
-  .close-wrapper {
-    padding: 14px 11px 6px 22px;
-    display: flex;
-    justify-content: end;
-    button.close-btn {
-      all: unset;
-      cursor: pointer;
-      text-align: right;
-    }
-  }
   .content {
-    padding: 0 21px 6px;
+    padding: 41px 21px 6px;
     .header-actions {
       padding: 12px 0;
       display: flex;
@@ -316,6 +347,10 @@ button {
     }
     .bottom-actions {
       margin-top: 16px;
+    }
+
+    @media screen and (max-width: 768px) {
+      padding-top: 21px;
     }
   }
 }

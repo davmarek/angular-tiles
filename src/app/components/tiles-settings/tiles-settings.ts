@@ -114,7 +114,9 @@ export class TilesSettings {
 
     // If the value of visibleTilesCount is anything other than 0
     // we don't want to load all tiles -> set loadAll to false
-    this.loadAll.set(!(config?.visibleTileCount !== 0));
+    const loadAll = config.visibleTileCount === null || config.visibleTileCount === 0;
+    this.loadAll.set(loadAll);
+    this.syncVisibleTilesCountEnabled(loadAll);
   }
 
   protected onSave() {
@@ -140,7 +142,20 @@ export class TilesSettings {
     this.dialog.nativeElement.close();
   }
 
-  protected markFormDirty() {
-    this.form.markAsDirty();
+  protected changedLoadAll() {
+    this.syncVisibleTilesCountEnabled(this.loadAll());
+  }
+
+  private syncVisibleTilesCountEnabled(loadAll: boolean) {
+    const ctrl = this.form.controls.visibleTilesCount;
+    if (loadAll) {
+      ctrl.reset();
+      ctrl.disable();
+    } else {
+      ctrl.enable();
+      if (!ctrl.value) {
+        ctrl.setValue(1);
+      }
+    }
   }
 }
