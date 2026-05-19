@@ -25,6 +25,7 @@
 
   &.checked {
     background-color: var(--admin-blue);
+    box-shadow: none;
     .ball {
       left: calc(100% - 16px - 2px);
     }

@@ -38,12 +38,12 @@ export class TilesSettings {
   private readonly tileService = inject(TileService);
   @ViewChild('tilesSettingsDialog') dialog!: ElementRef<HTMLDialogElement>;
 
-  schemaOptions: SelectOption[] = [
+  readonly schemaOptions: SelectOption[] = [
     { label: '3 tiles', value: '3', icon: 'grid' },
     { label: '4 tiles', value: '4', icon: 'grid' },
   ];
 
-  form = this.fb.group({
+  readonly form = this.fb.group({
     title: ['', Validators.required],
     subtitle: ['', Validators.required],
     gridSchema: ['', Validators.required], // Needs to be string - because HTML select
@@ -55,10 +55,10 @@ export class TilesSettings {
 
 
   get tiles() {
-    return this.form.get('tiles') as FormArray;
+    return this.form.get('tiles') as FormArray<TileForm>;
   }
 
-  private makeTile(): TileForm {
+  private createTileFormControl(): TileForm {
     return this.fb.group({
       text: ['', Validators.required],
       link: ['', Validators.required],
@@ -68,7 +68,7 @@ export class TilesSettings {
   }
 
   public addTile() {
-    this.tiles.push(this.makeTile());
+    this.tiles.push(this.createTileFormControl());
   }
   protected removeTile(idx: number) {
     this.tiles.removeAt(idx);
@@ -96,7 +96,7 @@ export class TilesSettings {
     if (this.tiles.length !== config.tiles.length) {
       this.tiles.clear();
       config.tiles.forEach(() => {
-        this.tiles.push(this.makeTile());
+        this.tiles.push(this.createTileFormControl());
       });
     }
 
@@ -104,7 +104,7 @@ export class TilesSettings {
     this.tiles.patchValue(config.tiles);
 
     // If the value of visibleTilesCount is anything other than 0
-    // we don't want to load all tiles
+    // we don't want to load all tiles -> set loadAll to false
     this.loadAll.set(!(config?.visibleTileCount !== 0));
   }
 

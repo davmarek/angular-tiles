@@ -1,16 +1,17 @@
 import { AsyncPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Tile, TileService } from '../../services/tile-service';
+import { TileItem, TileService } from '../../services/tile-service';
+import { Tile } from '../tile/tile';
 import { TilesSettings } from '../tiles-settings/tiles-settings';
 
 @Component({
-  selector: 'app-tiles',
-  imports: [AsyncPipe, TilesSettings],
-  templateUrl: './tiles.html',
-  styleUrl: './tiles.scss',
+  selector: 'app-tiles-grid',
+  imports: [AsyncPipe, TilesSettings, Tile],
+  templateUrl: './tiles-grid.html',
+  styleUrl: './tiles-grid.scss',
 })
-export class Tiles {
+export class TilesGrid {
   private route = inject(ActivatedRoute);
   private tileService = inject(TileService);
 
@@ -24,7 +25,7 @@ export class Tiles {
     });
   }
 
-  limitTiles(tiles: Tile[], count?: number | null): Tile[] {
+  limitTiles(tiles: TileItem[], count?: number | null): TileItem[] {
     if (count === undefined || count === null || count === 0) {
       return tiles;
     }

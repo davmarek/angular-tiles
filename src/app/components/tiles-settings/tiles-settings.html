@@ -1,3 +1,7 @@
+<button command="show-modal" commandfor="tilesSettingsDialog" type="button" class="btn-settings">
+  <img src="/assets/icons/icon-bb-iconset-settings.svg" alt="Settings" />
+</button>
+
 <dialog #tilesSettingsDialog id="tilesSettingsDialog" (toggle)="onToggle($event)">
   <form [formGroup]="form" (ngSubmit)="onSave()">
     <aside class="left">
@@ -56,12 +60,7 @@
             <div class="form-control-input">
               <label>Tiles visible</label>
 
-              <input
-                type="number"
-                min="1"
-                [max]="form.controls.tiles.length"
-                formControlName="visibleTilesCount"
-              />
+              <input type="number" min="1" formControlName="visibleTilesCount" />
             </div>
           }
         </div>

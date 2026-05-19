@@ -7,13 +7,13 @@ export interface TilesConfig {
   title: string;
   subtitle: string;
   visibleTileCount: number | null; // 0 = show all, N = show first N
-  tiles: Tile[];
+  tiles: TileItem[];
 }
 export interface GridSchema {
   columns: number;
   spans: number[];
 }
-export interface Tile {
+export interface TileItem {
   text: string;
   link: string;
   bgColor: string;

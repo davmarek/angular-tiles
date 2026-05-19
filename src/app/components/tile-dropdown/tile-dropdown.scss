@@ -13,9 +13,14 @@
   align-items: center;
   justify-content: center;
   border-radius: 4px;
+  color: #9fa7bb;
 
   &:hover {
     background-color: #f1f4f8;
+  }
+
+  &.active svg {
+    color: var(--admin-blue);
   }
 }
 
@@ -42,7 +47,8 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    padding: 8px 12px;
+    width: 28px;
+    padding: 6px 8px;
     background: transparent;
     border: none;
     width: 100%;
@@ -52,6 +58,7 @@
     cursor: pointer;
 
     &:hover {
+      color: #242b39;
       background-color: #f1f4f8;
     }
   }

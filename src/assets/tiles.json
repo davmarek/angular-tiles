@@ -1,12 +1,12 @@
 {
   "title": "Extra Text",
   "subtitle": "Get Inspired",
-  "visibleTileCount": 1,
+  "visibleTileCount": 0,
   "gridSchema": {
     "columns": 3,
     "spans": [1]
   },
-  "gridSchemaAlt": {
+  "otherGridSchemaForExample": {
     "columns": 4,
     "spans": [1, 1, 2, 2, 1, 1]
   },

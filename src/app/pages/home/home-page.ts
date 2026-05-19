@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { Tiles } from '../../components/tiles/tiles';
+import { TilesGrid } from '../../components/tiles-grid/tiles-grid';
 
 @Component({
   selector: 'app-home-page',
-  imports: [Tiles],
+  imports: [TilesGrid],
   templateUrl: './home-page.html',
   styleUrl: './home-page.scss',
 })
-export class HomePage {}
+export class HomePage { }
