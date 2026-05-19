@@ -1,7 +1,7 @@
 {
   "title": "Extra Text",
   "subtitle": "Get Inspired",
-  "visibleTileCount": 0,
+  "visibleTileCount": 1,
   "gridSchema": {
     "columns": 3,
     "spans": [1]

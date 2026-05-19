@@ -42,13 +42,14 @@ export class TilesSettings {
     tiles: this.fb.array<TileForm>([]),
   });
 
-  readonly showAll = model<boolean>(false);
+  readonly loadAll = model<boolean>(true);
 
   @ViewChild('tilesSettingsDialog') dialog!: ElementRef<HTMLDialogElement>;
 
   get tiles() {
     return this.form.get('tiles') as FormArray;
   }
+
   private makeTile(): TileForm {
     return this.fb.group({
       text: ['', Validators.required],
@@ -90,9 +91,13 @@ export class TilesSettings {
 
     // Set the actual data to the array items
     this.tiles.patchValue(config.tiles);
+
+    // If the value of visibleTilesCount is anything other than 0
+    // we don't want to load all tiles
+    this.loadAll.set(!(config?.visibleTileCount !== 0));
   }
 
-  public onSave() {
+  protected onSave() {
     if (!this.form.valid) {
       return;
     }
@@ -103,7 +108,7 @@ export class TilesSettings {
     this.tileService.updateConfig({
       title: v.title,
       subtitle: v.subtitle,
-      visibleTileCount: this.showAll() ? v.visibleTilesCount : 0,
+      visibleTileCount: this.loadAll() ? 0 : v.visibleTilesCount,
       gridSchema: {
         columns: parseInt(v.gridSchema),
         spans: spans ?? [1],
@@ -113,5 +118,9 @@ export class TilesSettings {
     this.form.markAsPristine();
 
     this.dialog.nativeElement.close();
+  }
+
+  protected markFormDirty() {
+    this.form.markAsDirty();
   }
 }

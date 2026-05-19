@@ -1,7 +1,7 @@
 import { Component, model } from '@angular/core';
 
 @Component({
-  selector: 'toggle',
+  selector: 'app-toggle',
   templateUrl: './toggle.html',
   styleUrl: './toggle.scss',
 })
