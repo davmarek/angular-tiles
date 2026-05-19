@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { TilesGrid } from '../../components/tiles-grid/tiles-grid';
 
 @Component({
@@ -6,5 +6,6 @@ import { TilesGrid } from '../../components/tiles-grid/tiles-grid';
   imports: [TilesGrid],
   templateUrl: './home-page.html',
   styleUrl: './home-page.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HomePage { }
+export class HomePage {}

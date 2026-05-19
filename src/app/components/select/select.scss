@@ -4,7 +4,7 @@
   font-family: inherit;
 }
 
-.select-container {
+.custom-select-wrapper {
   height: 30px;
   border-radius: 3px;
   border: solid 1px #e2e7ee;
@@ -25,7 +25,7 @@
   }
 }
 
-.selected-value {
+.select-trigger {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -54,7 +54,7 @@
   // flex-shrink: 0;
 }
 
-.dropdown-menu {
+.options-list {
   position: absolute;
   top: calc(100% + 4px);
   left: 0;
@@ -70,7 +70,7 @@
   overflow: hidden;
 }
 
-.dropdown-item {
+.option-item {
   display: flex;
   align-items: center;
   gap: 12px;

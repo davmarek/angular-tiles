@@ -1,5 +1,5 @@
 import { AsyncPipe } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TileItem, TileService } from '../../services/tile-service';
 import { Tile } from '../tile/tile';
@@ -10,6 +10,7 @@ import { TilesSettings } from '../tiles-settings/tiles-settings';
   imports: [AsyncPipe, TilesSettings, Tile],
   templateUrl: './tiles-grid.html',
   styleUrl: './tiles-grid.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TilesGrid {
   private route = inject(ActivatedRoute);

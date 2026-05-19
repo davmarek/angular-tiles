@@ -1,11 +1,14 @@
-import { Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
 @Component({
   selector: 'app-tile',
   imports: [],
   templateUrl: './tile.html',
   styleUrl: './tile.scss',
-  standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  host: {
+    '[style.gridColumn]': '`span ${span()}`',
+  },
 })
 export class Tile {
   text = input.required<string>();

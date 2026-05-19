@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
   selector: 'icon-admin-quares',
@@ -29,5 +29,6 @@ import { Component } from '@angular/core';
       opacity: 1;
     }
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class IconAdminQuares {}

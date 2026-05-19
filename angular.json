@@ -6,7 +6,7 @@
   },
   "newProjectRoot": "projects",
   "projects": {
-    "header-slideshow": {
+    "tiles": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -60,10 +60,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "header-slideshow:build:production"
+              "buildTarget": "tiles:build:production"
             },
             "development": {
-              "buildTarget": "header-slideshow:build:development"
+              "buildTarget": "tiles:build:development"
             }
           },
           "defaultConfiguration": "development"

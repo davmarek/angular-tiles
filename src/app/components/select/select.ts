@@ -1,4 +1,12 @@
-import { Component, ElementRef, HostListener, inject, input, model } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  HostListener,
+  inject,
+  input,
+  model,
+} from '@angular/core';
 
 export interface SelectOption {
   label: string;
@@ -11,6 +19,7 @@ export interface SelectOption {
   imports: [],
   templateUrl: './select.html',
   styleUrl: './select.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Select {
   private elementRef = inject(ElementRef);

@@ -1,10 +1,17 @@
-import { Component, ElementRef, HostListener, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  HostListener,
+  inject,
+} from '@angular/core';
 
 @Component({
   selector: 'app-tile-dropdown',
   imports: [],
   templateUrl: './tile-dropdown.html',
   styleUrl: './tile-dropdown.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TileDropdown {
   private elementRef = inject(ElementRef);

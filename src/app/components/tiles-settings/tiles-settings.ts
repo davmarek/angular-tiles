@@ -1,4 +1,11 @@
-import { Component, ElementRef, inject, model, ViewChild } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  inject,
+  model,
+  ViewChild,
+} from '@angular/core';
 import {
   FormArray,
   FormControl,
@@ -32,10 +39,13 @@ import { TileDropdown } from '../tile-dropdown/tile-dropdown';
   imports: [ReactiveFormsModule, IconAdminQuares, Toggle, Select, TileDropdown],
   templateUrl: './tiles-settings.html',
   styleUrl: './tiles-settings.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TilesSettings {
   private readonly fb = inject(NonNullableFormBuilder);
   private readonly tileService = inject(TileService);
+  private elementRef = inject(ElementRef);
+
   @ViewChild('tilesSettingsDialog') dialog!: ElementRef<HTMLDialogElement>;
 
   readonly schemaOptions: SelectOption[] = [
@@ -52,7 +62,6 @@ export class TilesSettings {
   });
 
   readonly loadAll = model<boolean>(true);
-
 
   get tiles() {
     return this.form.get('tiles') as FormArray<TileForm>;

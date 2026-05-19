@@ -1,5 +1,5 @@
-<div class="dropdown-container">
-  <button class="icon-button" type="button" (click)="toggle()" [class.active]="isOpen">
+<div class="tile-menu-wrapper">
+  <button class="menu-trigger-btn" type="button" (click)="toggle()" [class.active]="isOpen">
     <svg
       xmlns="http://www.w3.org/2000/svg"
       xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -15,12 +15,12 @@
     </svg>
   </button>
   @if (isOpen) {
-    <div class="dropdown-menu">
+    <div class="action-menu">
       <button type="button">
         <img src="assets/icons/icon-admin-iconset-image-from-dam.svg" alt="Asset" width="16" />
         Asset in DAM
       </button>
-      <button type="button" class="more-options">
+      <button type="button">
         <img src="assets/icons/icon-admin-iconset-plus-grey.svg" alt="plus" width="16" />
         More options
       </button>
