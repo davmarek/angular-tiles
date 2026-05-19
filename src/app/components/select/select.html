@@ -1,1 +1,44 @@
-<p>select works!</p>
+<div class="select-container" (click)="toggle()" [class.is-open]="isOpen">
+  <div class="selected-value">
+    @if (selectedOption?.icon === 'grid') {
+      <svg class="icon" viewBox="0 0 16 16" width="16" height="16">
+        <rect x="1" y="3" width="4" height="4" rx="0.5" fill="#a5c4ff" />
+        <rect x="6" y="3" width="4" height="4" rx="0.5" fill="#407cff" />
+        <rect x="11" y="3" width="4" height="4" rx="0.5" fill="#a5c4ff" />
+        <rect x="1" y="8" width="4" height="4" rx="0.5" fill="#407cff" />
+        <rect x="6" y="8" width="4" height="4" rx="0.5" fill="#a5c4ff" />
+        <rect x="11" y="8" width="4" height="4" rx="0.5" fill="#407cff" />
+      </svg>
+    }
+    <span class="label">{{ selectedOption?.label || 'Select an option' }}</span>
+    <img
+      src="assets/icons/icon-admin-iconset-triangle-down-small.svg"
+      alt="down-icon"
+      class="arrow"
+    />
+  </div>
+
+  @if (isOpen) {
+    <div class="dropdown-menu">
+      @for (option of options(); track option.value) {
+        <div
+          class="dropdown-item"
+          [class.active]="option.value === value()"
+          (click)="selectOption(option, $event)"
+        >
+          @if (option.icon === 'grid') {
+            <svg class="icon" viewBox="0 0 16 16" width="16" height="16">
+              <rect x="1" y="2" width="4" height="4" rx="0.5" fill="#a5c4ff" />
+              <rect x="6" y="2" width="4" height="4" rx="0.5" fill="#407cff" />
+              <rect x="11" y="2" width="4" height="4" rx="0.5" fill="#a5c4ff" />
+              <rect x="1" y="7" width="4" height="4" rx="0.5" fill="#407cff" />
+              <rect x="6" y="7" width="4" height="4" rx="0.5" fill="#a5c4ff" />
+              <rect x="11" y="7" width="4" height="4" rx="0.5" fill="#407cff" />
+            </svg>
+          }
+          <span class="label">{{ option.label }}</span>
+        </div>
+      }
+    </div>
+  }
+</div>

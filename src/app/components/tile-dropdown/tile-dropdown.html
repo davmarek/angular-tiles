@@ -1,0 +1,25 @@
+<div class="dropdown-container">
+  <button class="icon-button" type="button" (click)="toggle()" [class.active]="isOpen">
+    <img src="assets/icons/icon-bb-iconset-dots.svg" alt="more options" />
+  </button>
+  @if (isOpen) {
+    <div class="dropdown-menu">
+      <button type="button">
+        <img
+          src="assets/icons/icon-admin-iconset-image-from-dam.svg"
+          alt="Asset"
+          width="16"
+        />
+        Asset in DAM
+      </button>
+      <button type="button" class="more-options">
+        <img
+          src="assets/icons/icon-admin-iconset-plus-grey.svg"
+          alt="plus"
+          width="16"
+        />
+        More options
+      </button>
+    </div>
+  }
+</div>

@@ -10,6 +10,7 @@ import {
 import { take } from 'rxjs';
 import { TilesConfig, TileService } from '../../services/tile-service';
 import { IconAdminQuares } from '../icons/admin-quares';
+import { Select, SelectOption } from '../select/select';
 import { Toggle } from '../toggle/toggle';
 
 type TileForm = FormGroup<{
@@ -24,15 +25,23 @@ const GRID_SCHEMAS = new Map([
   ['4', [1, 1, 2, 2, 1, 1]],
 ]);
 
+import { TileDropdown } from '../tile-dropdown/tile-dropdown';
+
 @Component({
   selector: 'app-tiles-settings',
-  imports: [ReactiveFormsModule, IconAdminQuares, Toggle],
+  imports: [ReactiveFormsModule, IconAdminQuares, Toggle, Select, TileDropdown],
   templateUrl: './tiles-settings.html',
   styleUrl: './tiles-settings.scss',
 })
 export class TilesSettings {
-  private fb = inject(NonNullableFormBuilder);
-  private tileService = inject(TileService);
+  private readonly fb = inject(NonNullableFormBuilder);
+  private readonly tileService = inject(TileService);
+  @ViewChild('tilesSettingsDialog') dialog!: ElementRef<HTMLDialogElement>;
+
+  schemaOptions: SelectOption[] = [
+    { label: '3 tiles', value: '3', icon: 'grid' },
+    { label: '4 tiles', value: '4', icon: 'grid' },
+  ];
 
   form = this.fb.group({
     title: ['', Validators.required],
@@ -44,7 +53,6 @@ export class TilesSettings {
 
   readonly loadAll = model<boolean>(true);
 
-  @ViewChild('tilesSettingsDialog') dialog!: ElementRef<HTMLDialogElement>;
 
   get tiles() {
     return this.form.get('tiles') as FormArray;
@@ -61,6 +69,9 @@ export class TilesSettings {
 
   public addTile() {
     this.tiles.push(this.makeTile());
+  }
+  protected removeTile(idx: number) {
+    this.tiles.removeAt(idx);
   }
 
   // Triggered when toggling the dialog (open/closed)

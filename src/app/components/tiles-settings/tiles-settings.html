@@ -14,12 +14,13 @@
       </header>
       <div class="content">
         <div class="grid-schema-control">
-          <label for="gridSchema">Display</label>
+          <label>Display</label>
 
-          <select name="gridSchema" id="gridSchema" formControlName="gridSchema" type="number">
-            <option value="3">3 columns</option>
-            <option value="4">4 columns</option>
-          </select>
+          <app-select
+            [options]="schemaOptions"
+            [value]="form.controls.gridSchema.value"
+            (valueChange)="form.controls.gridSchema.setValue($event); markFormDirty()"
+          />
         </div>
 
         <div class="divider"></div>
@@ -66,7 +67,9 @@
         </div>
       </div>
       <div class="bottom">
-        <button type="submit" [disabled]="!form.valid || form.pristine">Update</button>
+        <button class="primary" type="submit" [disabled]="!form.valid || form.pristine">
+          Update
+        </button>
       </div>
     </aside>
 
@@ -81,46 +84,63 @@
         <header>
           <div class="actions">
             <span class="heading">Tiles</span>
-            <button type="button" (click)="addTile()">
-              <img src="/assets/icons/icon-admin-iconset-plus.svg" alt="Plus" />
+            <button type="button" (click)="addTile()" class="primary">
+              <img src="/assets/icons/icon-admin-iconset-plus-white.svg" alt="Plus" />
               Add
             </button>
           </div>
         </header>
-        <table>
-          <thead>
-            <tr>
-              <th>X</th>
-              <th class="center">BG</th>
-              <th>Text</th>
-              <th>Link</th>
-              <th class="right">
-                <button>V</button>
-              </th>
-            </tr>
-          </thead>
-          <tbody formArrayName="tiles">
-            @for (tile of tiles.controls; track tile; let i = $index) {
-              <tr [formGroupName]="i">
-                <td>
-                  <button>X</button>
-                </td>
-                <td>
-                  <input type="color" formControlName="bgColor" />
-                </td>
-                <td>
-                  <input type="text" formControlName="text" />
-                </td>
-                <td>
-                  <input type="text" formControlName="link" />
-                </td>
-                <td>
-                  <input type="text" formControlName="bgImage" />
-                </td>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>
+                  <img src="assets/icons/icon-bb-iconset-arrange-down.svg" alt="arrange" />
+                </th>
+                <th class="center">BG</th>
+                <th>Text</th>
+                <th>Link</th>
+                <th class="right">
+                  <img src="assets/icons/icon-admin-iconset-triangle-down-small.svg" alt="more" />
+                </th>
               </tr>
-            }
-          </tbody>
-        </table>
+            </thead>
+            <tbody formArrayName="tiles">
+              @for (tile of tiles.controls; track tile; let idx = $index) {
+                <tr [formGroupName]="idx">
+                  <td>
+                    <img src="assets/icons/icon-bb-iconset-move-simple.svg" alt="move" />
+                  </td>
+                  <td class="center" style="padding-right: 16px">
+                    <label class="color-picker-wrapper">
+                      <input type="color" formControlName="bgColor" />
+                      <img
+                        src="assets/icons/icon-admin-iconset-triangle-down-small.svg"
+                        alt="more"
+                      />
+                    </label>
+                  </td>
+                  <td>
+                    <input type="text" formControlName="text" />
+                  </td>
+                  <td>
+                    <input type="text" formControlName="link" />
+                  </td>
+
+                  <td>
+                    <div class="actions-wrapper">
+                      <button (click)="removeTile(idx)" type="button" class="icon-button">
+                        <img src="assets/icons/icon-bb-iconset-remove.svg" alt="remove" />
+                      </button>
+
+                      <app-tile-dropdown />
+                    </div>
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </form>
