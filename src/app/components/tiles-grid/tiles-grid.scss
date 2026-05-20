@@ -14,6 +14,7 @@ section {
   letter-spacing: 1px;
   color: #9fa7bb;
 }
+
 .grid-subtitle {
   margin: 0 auto 58px;
   font-size: 34px;
@@ -32,9 +33,13 @@ section {
   display: grid;
   list-style: none;
   gap: 30px;
+  grid-template-columns: repeat(var(--columns), 1fr);
 
   @media (max-width: 620px) {
     grid-template-columns: 1fr;
     gap: 8px;
+    & > * {
+      grid-column: span 1 !important;
+    }
   }
 }

@@ -3,7 +3,7 @@
     <h5 class="grid-title">{{ c.title }}</h5>
     <h2 class="grid-subtitle">{{ c.subtitle }}</h2>
     @if (c.tiles.length > 0) {
-      <ul class="tiles-layout" [style.gridTemplateColumns]="`repeat(${c.gridSchema.columns}, 1fr)`">
+      <ul class="tiles-layout" [style]="`--columns: ${c.gridSchema.columns}`">
         @for (tile of limitTiles(c.tiles, c.visibleTileCount); track $index; let idx = $index) {
           <app-tile
             [text]="tile.text"
@@ -12,7 +12,6 @@
             [bgImage]="tile.bgImage"
             [span]="c.gridSchema.spans[idx % c.gridSchema.spans.length]"
           />
-
         }
       </ul>
     } @else {
