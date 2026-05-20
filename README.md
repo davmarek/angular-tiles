@@ -20,6 +20,8 @@ npm start
 
 Serves the app at `http://localhost:4200/`
 
+> **The settings panel is accessed by setting `/?mode=editor` in the URL**
+
 ## Build
 
 ```bash

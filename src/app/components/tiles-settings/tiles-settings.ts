@@ -81,6 +81,7 @@ export class TilesSettings {
   }
   protected removeTile(idx: number) {
     this.tiles.removeAt(idx);
+    this.form.controls.tiles.markAsDirty();
   }
 
   // Triggered when toggling the dialog (open/closed)

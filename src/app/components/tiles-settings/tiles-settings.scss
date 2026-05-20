@@ -105,6 +105,14 @@ input {
     width: 18px;
     height: 18px;
     outline: none;
+
+    &::-webkit-color-swatch-wrapper {
+      padding: 0;
+    }
+
+    &::-webkit-color-swatch {
+      border: none;
+    }
   }
 }
 
@@ -345,9 +353,6 @@ button {
         cursor: pointer;
       }
     }
-    .bottom-actions {
-      margin-top: 16px;
-    }
 
     @media screen and (max-width: 768px) {
       padding-top: 21px;
@@ -464,5 +469,14 @@ table {
 
   img {
     vertical-align: middle;
+  }
+}
+
+.bottom-actions {
+  margin-top: 16px;
+  * {
+    color: #2f3748;
+    font-weight: 500;
+    font-size: 13px;
   }
 }
